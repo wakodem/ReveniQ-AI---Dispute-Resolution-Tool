@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "_readme": "Add categories under categories using the same keys as the CATEGORY column. Copy Rejection Fee Dispute and replace pipeline SQL, finalize.type, templates, and short_explanations. Optional: set REVENIQ_GROUNDED_SPECS to a different JSON path.",
+  "categories": {
+    "Rejection Fee Dispute": {
+      "memo_manual_review": {
+        "env_disable": "REVENIQ_REJECTION_FEE_MEMO_MANUAL_REVIEW",
+        "patterns": [
+          "funds?\\s+were\\s+available",
+          "money\\s+was\\s+in\\s+the\\s+account",
+          "money\\s+in\\s+the\\s+account",
+          "sufficient\\s+funds",
+          "enough\\s+funds",
+          "enough\\s+balance",
+          "had\\s+funds",
+          "bank\\s+statement",
+          "statement\\s+on\\s+crm",
+          "statement\\s+attached",
+          "available\\s+balance",
+          "funds\\s+available",
+          "debit\\s+rejected.+(?:although|but).+(?:money|funds)",
+          "telkom\\s+did\\s+not\\s+debit",
+          "not\\s+debited\\s+for",
+          "balance\\s+in\\s+account",
+          "proof\\s+attached",
+          "insufficient\\s+funds.+(?:but|however).+(?:statement|funds)"
+        ],
+        "short_explanation_memo": "CSR need to manually review the bank details stored in the Telkom system is correct or not."
+      },
+      "short_explanations": {
+        "APPROVE": "A qualifying cash payment was found within the DD extract-to-due window; reversal recommended.",
+        "REJECT": "There is no qualifying cash payment found Before the Billing Due Date; charge stands.",
+        "MANUAL_REVIEW": "Missing DD request or null dates; escalate for manual review."
+      },
+      "pipeline": [
+        {
+          "id": "1",
+          "sql": "SELECT account_id FROM ar1_dispute WHERE status = 'O' AND dispute_id = :did",
+          "bind": { "did": "dispute_id" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 1 — no open dispute (status O); manual review.",
+              "audit_notes": "Step 1: no open dispute for this dispute_id.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": { "account_id": "account_id" }
+        },
+        {
+          "id": "2",
+          "sql": "SELECT account_id, credit_id, activity_date FROM ( SELECT account_id, credit_id, activity_date, ROW_NUMBER() OVER ( PARTITION BY account_id ORDER BY activity_date DESC ) AS rn FROM ar1_payment_activity WHERE account_id = :aid AND activity_type = 'BCK' ) bck WHERE bck.rn = 1",
+          "bind": { "aid": "account_id" },
+          "on_empty": {
+            "set": {
+              "bck_found": false,
+              "decision": "REJECT",
+              "audit_notes": "Step 2: no BCK (backout) event on account.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": {
+            "account_id": "account_id",
+            "credit_id": "credit_id",
+            "bck_date_raw": "activity_date",
+            "last_bck_payment_date": "activity_date"
+          },
+          "post_store": { "bck_found": true }
+        },
+        {
+          "id": "3",
+          "sql": "SELECT pay_channel_id FROM ( SELECT pay_channel_id FROM ar1_pay_channel WHERE account_id = :aid ) WHERE ROWNUM = 1",
+          "bind": { "aid": "account_id" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 3 — no pay channel for account.",
+              "audit_notes": "Step 3 — no pay channel for account.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": { "pay_channel_no": "pay_channel_id" }
+        },
+        {
+          "id": "4",
+          "sql": "SELECT effective_date FROM ( SELECT effective_date FROM bl1_charge_request WHERE pay_channel_no = :pc AND charge_code = 'DCK' AND (effective_date = :bck OR effective_date = :bck + 1) ORDER BY effective_date ) WHERE ROWNUM = 1",
+          "bind": { "pc": "pay_channel_no", "bck": "bck_date_raw" },
+          "on_empty": {
+            "set": {
+              "dck_found": false,
+              "decision": "REJECT",
+              "audit_notes": "Step 4: no DCK charge for pay_channel / BCK effective_date window.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": { "dck_effective_date": "effective_date" },
+          "post_store": { "dck_found": true }
+        },
+        {
+          "id": "5a",
+          "sql": "SELECT payment_id FROM ( SELECT payment_id FROM ar1_payment WHERE account_id = :aid AND credit_id = :cid ) WHERE ROWNUM = 1",
+          "bind": { "aid": "account_id", "cid": "credit_id" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 5a — no payment row for BCK credit_id.",
+              "audit_notes": "Step 5a — no payment row for BCK credit_id.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": { "payment_id": "payment_id" }
+        },
+        {
+          "id": "5b",
+          "sql": "SELECT direct_debit_voucher FROM ( SELECT direct_debit_voucher FROM ar1_payment_details WHERE account_id = :aid AND payment_id = :pid AND reversal_reason = 'BCK' ) WHERE ROWNUM = 1",
+          "bind": { "aid": "account_id", "pid": "payment_id" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 5b — no payment detail with reversal_reason BCK / DD voucher.",
+              "audit_notes": "Step 5b — no payment detail with reversal_reason BCK / DD voucher.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": { "dd_voucher": "direct_debit_voucher" }
+        },
+        {
+          "id": "5c",
+          "sql": "SELECT extract_date, due_date FROM ( SELECT extract_date, due_date FROM ar1_direct_debit_request WHERE account_id = :aid AND direct_debit_voucher = :v ) WHERE ROWNUM = 1",
+          "bind": { "aid": "account_id", "v": "dd_voucher" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 5c — no direct debit request row for voucher.",
+              "audit_notes": "Step 5c — no direct debit request row for voucher.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": {
+            "extract_date_raw": "extract_date",
+            "due_date_raw": "due_date",
+            "extract_date": "extract_date",
+            "due_date": "due_date"
+          },
+          "post_store_check_null_dates": true
+        },
+        {
+          "id": "5d",
+          "sql": "SELECT MIN(deposit_date) AS cash_payment_date FROM ar1_payment_details WHERE account_id = :aid AND deposit_date BETWEEN :ex AND :du AND payment_method = 'CA'",
+          "bind": { "aid": "account_id", "ex": "extract_date_raw", "du": "due_date_raw" },
+          "store_from_row": { "cash_payment_date": "cash_payment_date" }
+        }
+      ],
+      "finalize": {
+        "type": "cash_window_decision",
+        "cash_field": "cash_payment_date",
+        "approve_audit": "Cash payment on {cash_payment_date} between extract {extract_date} and due {due_date}; reverse DCK and post credit.",
+        "reject_audit": "No Cash payment between bank extract date {extract_date} and due {due_date}; charge stands."
+      },
+      "date_fields": [
+        "last_bck_payment_date",
+        "dck_effective_date",
+        "extract_date",
+        "due_date",
+        "cash_payment_date"
+      ],
+      "templates": {
+        "agent_summary": "**Agent Summary**\n- **Dispute ID:** {{dispute_id}}\n- **Account ID:** {{account_id}}\n- **Key findings:** BCK event: {{bck_yesno}}; DCK charge: {{dck_yesno}}; Cash payment received: {{cash_yesno}}.\n- **Decision:** **{{decision}}**\n- **Evidence references:** Payment backout date={{last_bck_payment_date}}; Rejection Fee Date={{dck_effective_date}}; DD extracted to bank={{extract_date}} Billing_Due_Date={{due_date}}; cash_payment_date={{cash_payment_date}}.\n- **Notes for audit:** {{audit_notes}}",
+        "customer_explanation": "**Customer Explanation**\nWe reviewed your account (ID {{account_id}}) for the rejection fee (DCK). Our checks show:\n- {{line_bck}}\n- {{line_dck}}\n- {{line_cash}}\nResult: **{{decision}}**.\nShort explanation: {{short_explanation}}",
+        "recommended_approve": "**Recommended Action**\n- APPROVE: Create the charge level credit on the DCK charge; record reversal reason and reference dispute {{dispute_id}}.\n- Add audit note: \"DCK reversed — cash payment received on {{cash_payment_date}} within bank extract date {{extract_date}} to billing due date {{due_date}}.",
+        "recommended_reject": "**Recommended Action**\n-  REJECT: Leave charge in place; include evidence lines and escalate only if customer provides new proof.\n- Evidence: Payment Backout={{bck_yesno}}, DCK charge created={{dck_yesno}}, Cash payment before due date={{cash_yesno}}; dispute {{dispute_id}}.",
+        "recommended_manual": "**Recommended Action**\n-  MANUAL REVIEW: Escalate to senior back-office with Step number and reason: {{escalation_or_audit}}."
+      }
+    },
+    "Late Payment / Interest Dispute": {
+      "memo_manual_review": {
+        "env_disable": "REVENIQ_LATE_PAYMENT_MEMO_MANUAL_REVIEW",
+        "patterns": [
+          "system\\s+error",
+          "system\\s+delay",
+          "posted\\s+late\\s+by\\s+telkom",
+          "telkom.*delay",
+          "payment\\s+was\\s+on\\s+time.*posted\\s+late",
+          "bank\\s+confirmed.*on\\s+time",
+          "payment.*processed\\s+late"
+        ],
+        "short_explanation_memo": "CSR needs to manually verify whether the payment posting delay was caused by a system or bank processing issue."
+      },
+      "short_explanations": {
+        "APPROVE": "Payment was received on or before the due date but posted late; late payment fee should be credited.",
+        "REJECT": "Payment was received after the due date or outstanding balance remains; late payment fee is valid.",
+        "MANUAL_REVIEW": "Missing charge, payment data, or ambiguous timing; escalate for manual review."
+      },
+      "pipeline": [
+        {
+          "id": "1",
+          "sql": "SELECT DISPUTE_ID, CHARGE_ID, ACCOUNT_ID, BILLING_ARRANGEMENT_ID, INVOICE_ID, AMOUNT, CHARGE_CODE, CHARGE_CREATION_DATE, DISPUTE_CREATION_DATE, DEBIT_ID, CHARGES_AMOUNT, TAX_AMOUNT, BALANCE, DUE_DATE, RESTRICTION_AMOUNT FROM ( SELECT base.DISPUTE_ID, base.CHARGE_ID, base.ACCOUNT_ID, base.BILLING_ARRANGEMENT_ID, base.INVOICE_ID, base.AMOUNT, base.CHARGE_CODE, base.CHARGE_CREATION_DATE, base.DISPUTE_CREATION_DATE, base.RESTRICTION_AMOUNT, cg.DEBIT_ID, cg.CHARGES_AMOUNT, cg.TAX_AMOUNT, cg.BALANCE, cg.DUE_DATE, ROW_NUMBER() OVER (PARTITION BY base.DISPUTE_ID ORDER BY cg.DUE_DATE DESC) AS rn2 FROM ( SELECT DISPUTE_ID, CHARGE_ID, ACCOUNT_ID, BILLING_ARRANGEMENT_ID, INVOICE_ID, AMOUNT, CHARGE_CODE, CREATION_DATE AS CHARGE_CREATION_DATE, DISPUTE_CREATION_DATE, RESTRICTION_AMOUNT FROM ( SELECT d.DISPUTE_ID, c.CHARGE_ID, c.ACCOUNT_ID, c.BILLING_ARRANGEMENT_ID, c.INVOICE_ID, c.AMOUNT, c.CHARGE_CODE, c.CREATION_DATE, c.RESTRICTION_AMOUNT, d.SYS_CREATION_DATE AS DISPUTE_CREATION_DATE, ROW_NUMBER() OVER (PARTITION BY d.DISPUTE_ID ORDER BY c.CREATION_DATE DESC) AS rn FROM ar1_dispute d JOIN ar1_charges c ON c.ACCOUNT_ID = d.ACCOUNT_ID AND c.CHARGE_CODE = 'LATE_PYM' AND c.CREATION_DATE < d.SYS_CREATION_DATE WHERE d.DISPUTE_ID IN (:did) ) WHERE rn = 1 ) base JOIN ar1_charge_group cg ON cg.ACCOUNT_ID = base.ACCOUNT_ID AND cg.BILLING_ARRANGEMENT_ID = base.BILLING_ARRANGEMENT_ID AND cg.DUE_DATE < base.CHARGE_CREATION_DATE ) WHERE rn2 = 1 ORDER BY DISPUTE_ID",
+          "bind": { "did": "dispute_id" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 1 — no matching late payment charge (LATE_PYM) found for this dispute.",
+              "reason_code": "NO_CHARGE_FOUND",
+              "audit_notes": "Step 1: no matching LATE_PYM charge found for this dispute_id.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": {
+            "account_id": "account_id",
+            "charge_id": "charge_id",
+            "billing_arrangement_id": "billing_arrangement_id",
+            "invoice_id": "invoice_id",
+            "charge_amount": "amount",
+            "charge_code": "charge_code",
+            "charge_creation_date": "charge_creation_date",
+            "dispute_creation_date": "dispute_creation_date",
+            "debit_id": "debit_id",
+            "charges_amount": "charges_amount",
+            "tax_amount": "tax_amount",
+            "balance": "balance",
+            "due_date": "due_date",
+            "due_date_raw": "due_date",
+            "restriction_amount": "restriction_amount"
+          },
+          "post_store_checks": [
+            {
+              "condition": "balance_gt_zero",
+              "field": "balance",
+              "set": {
+                "decision": "REJECT",
+                "audit_notes": "Step 1: outstanding balance of {balance} remains unpaid as of due date {due_date}. Late payment fee is valid.",
+                "success": true
+              },
+              "return": true
+            },
+            {
+              "condition": "restriction_gt_zero",
+              "field": "restriction_amount",
+              "set": {
+                "decision": "REJECT",
+                "audit_notes": "Step 1: a credit of {restriction_amount} has already been applied to this charge. No further action required.",
+                "success": true
+              },
+              "return": true
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "sql": "SELECT PAYMENT_ID, ACCOUNT_ID, DEPOSIT_DATE, REVERSAL_REASON, SYS_CREATION_DATE AS PAYMENT_CREATION_DATE, AMOUNT AS PAYMENT_AMOUNT FROM ( SELECT p.PAYMENT_ID, p.ACCOUNT_ID, p.DEPOSIT_DATE, p.REVERSAL_REASON, p.SYS_CREATION_DATE, p.AMOUNT, ROW_NUMBER() OVER (ORDER BY p.SYS_CREATION_DATE ASC) AS rn FROM ar1_payment_details p WHERE p.ACCOUNT_ID = :aid AND p.SYS_CREATION_DATE > :due ) WHERE rn = 1",
+          "bind": { "aid": "account_id", "due": "due_date_raw" },
+          "on_empty": {
+            "set": {
+              "decision": "MANUAL_REVIEW",
+              "escalation_reason": "Step 2 — no payment record found after the due date for this account.",
+              "reason_code": "NO_PAYMENT_FOUND",
+              "audit_notes": "Step 2: no payment record found after due date {due_date} for account {account_id}. CSR must verify payment history manually.",
+              "success": true
+            },
+            "return": true
+          },
+          "store_from_row": {
+            "payment_id": "payment_id",
+            "deposit_date": "deposit_date",
+            "reversal_reason": "reversal_reason",
+            "payment_creation_date": "payment_creation_date",
+            "payment_amount": "payment_amount"
+          }
+        }
+      ],
+      "finalize": {
+        "type": "late_payment_decision",
+        "payment_date_field": "payment_creation_date",
+        "due_date_field": "due_date_raw",
+        "charge_id_field": "charge_id",
+        "approve_audit": "Payment received on {payment_creation_date}, on or before due date {due_date}. Late payment fee on charge {charge_id} was incorrectly charged; initiate charge-level credit.",
+        "reject_audit": "Payment received on {payment_creation_date}, after due date {due_date}. Late payment fee is valid; charge stands."
+      },
+      "date_fields": [
+        "charge_creation_date",
+        "dispute_creation_date",
+        "due_date",
+        "deposit_date",
+        "payment_creation_date"
+      ],
+      "templates": {
+        "agent_summary": "**Agent Summary**\n- **Dispute ID:** {{dispute_id}}\n- **Account ID:** {{account_id}}\n- **Charge ID:** {{charge_id}}\n- **Key findings:** Late payment charge (LATE_PYM): found; Balance: {{balance}}; Restriction amount: {{restriction_amount}}; Payment after due date: {{payment_after_due_yesno}}.\n- **Decision:** **{{decision}}**\n- **Evidence references:** Charge creation date={{charge_creation_date}}; Due date={{due_date}}; Payment date={{payment_creation_date}}; Payment amount={{payment_amount}}; Balance={{balance}}.\n- **Notes for audit:** {{audit_notes}}",
+        "customer_explanation": "**Customer Explanation**\nWe reviewed your account (ID {{account_id}}) for the late payment fee (LATE_PYM) on charge {{charge_id}}. Our checks show:\n- {{line_charge}}\n- {{line_balance}}\n- {{line_payment}}\nResult: **{{decision}}**.\nShort explanation: {{short_explanation}}",
+        "recommended_approve": "**Recommended Action**\n- APPROVE: Initiate charge-level credit on charge {{charge_id}} for the late payment fee; record reversal reason and reference dispute {{dispute_id}}.\n- Add audit note: \"Late payment fee reversed — payment received on {{payment_creation_date}}, on or before due date {{due_date}}.\"",
+        "recommended_reject": "**Recommended Action**\n- REJECT: Leave late payment fee in place; payment was received after the due date.\n- Evidence: Payment date={{payment_creation_date}}, Due date={{due_date}}, Balance={{balance}}; dispute {{dispute_id}}.",
+        "recommended_manual": "**Recommended Action**\n- MANUAL REVIEW: Escalate to senior back-office with step number and reason: {{escalation_or_audit}}.\n- Reason code: {{reason_code}}"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# ReveniQ AI - Initial goal: CSV categorisation + dashboard
+# Digital COE Gen AI Team
+
+pandas>=2.0.0
+streamlit>=1.28.0
+plotly>=5.17.0
+openpyxl>=3.1.0
+python-dotenv>=1.0.0
+oracledb>=2.0.0

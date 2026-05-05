@@ -1,0 +1,743 @@
+DISPUTE_ID,STATUS,MEMO_TEXT
+1783724,J,Subscription - FA
+1799627,R,"Good day
+
+Please assist, customer is requesting a payment araangement for the pentalty changed to next month.
+since she only has the subscription amount now.
+
+customer contact number:0733333401"
+1803460,J,"Good day
+
+The customer was prematurely migrated and therefore the split billing did not fully cover the cost of the subscription fee."
+1791789,R,"Good day
+
+Please assist with Investigating Customer Account for Event Bill Charged from Sep-2025 till Jan 2026 Total amount of R646 and Credit customer Account . Customer did not know anyrhing about subscription that were charging
+
+Affected FA  501218847
+BAN 334566918
+Affected No 0814160489"
+1798190,J,"S HUISAMEN
+Customer upgraded the account and were advised the credit will be applied. She called and upgraded the speed on the 27/11/2025, was advised she will recieve a call in order to test the speed whether will be compatable. It was compatable but has recieved that speed in January 2026, and wants the credit for the month of Dec 2025.
+
+B510007049
+Cust called in, having issues with slow internet speed
+Cust subscribed to: 200/100 MBPS
+speed test results before refreshing the line
+Download: 40 mbps
+Upload:16.4 mbps
+Cust not at home, cannot refresh the line. nzimans5
+
+Subscription & usage for B510007049 Telkom Endless Fibre R 955.00Subscription services
+Description Period
+Retail Fibre BB 100/100Mbps 18 Nov 25 - 17 Dec 25 R 883.48Retail fibre contract fee (Consumer) 18 Nov 25 - 17 Dec 25 R 71.52Subtotal R 955.00Subscription & usage for TIN1518851 Telkom Endless Fibre R 814.82Subscription services
+Description Period
+TI-Mailbox 18 Nov 25 - 17 Dec 25 R 15.82Telkom Uncapped (40-100Mbps) 18 Nov 25 - 17 Dec 25 R 799.00
+
+Subscription & usage for B510007049 Telkom Endless Fibre R 1,089.00Subscription services
+Description Period
+Retail Fibre BB 200/100Mbps 18 Dec 25 - 17 Jan 26 R 1,017.48Retail fibre contract fee (Consumer) 18 Dec 25 - 17 Jan 26 R 71.52Subtotal R 1,089.00Subscription & usage for TIN1518851 Telkom Endless Fibre R 999.00Subscription services
+Description Period
+Telkom Uncapped (100-200Mbps) 18 Dec 25 - 17 Jan 26 R 999.00
+
+
+Change(Broadband,Internet) ,Closed,11/26/2025,2696239581A,2696239582A,Telkom Endless Fibre
+Customer Request
+Telkom Endless Fibre200/100 mbps
+
+Telkom Endless Fibre 100/100Mbps R909.00 R965.00 R56.00
+R1225-965=R260"
+1776419,R,POA ongoing
+1795884,R," relog from protection csse ---Incoming call
+Contact Phone: 0610128598
+
+Notes: Good day
+
+Customer have two profiles on the system.
+The one profile was created as business(FA: 509874785) and the other as a consumer (FA:  501501085)
+
+There is a Multisim that goes off on the Business FA 509874785, but the rest of the subscription reflects on FA 501501085.
+
+Customer wants all his products to deduct on one FA 501501085."
+1776728,J,Subscription with no usage on it 10Mbps not 
+1791172,R,"Customer id - 120715905
+Affected service - TIN1541502
+Cleint was migrated to fibre on 16 November 2018
+i.e 85 months ago
+Client had inidicated that he needed hi email address
+as well ( textilefreight) 
+Processing agent did not down gradetin to ti mail box and 
+had left tin including internet subscription running
+Cleint has erraneously been charged R288.51 instead of R15.82 if his migartiuon was done correctly
+I have now done order to downgrde service as initially requested.
+Client is requesting cerdit to be passed i.e
+ R288.51-R 15.82 = R 272.69 x 85 months = R 23 178.65
+Kindly econcile accordingly.
+Regards
+Cheyne FRancis"
+1776139,J,"Customer invoice is incorrect has the customer account is being over billed 
+
+Customer has a services line with a monthly subscription of -654.99
+But customer was charged 1,134.19 
+the services number B510011952 is not correct telkom lite uncapped at Retail Fibre BB Lite 50/25Mbps is not 1134.19
+
+calculations 
+monthly services fee / susbcription 
+
+ B510011952 = 1234.96 + 71.52
+=1306.48
+
+Plus the TIN number 
+
+TIN3957532= 155
+Minus discounts 
+=327.29
+
+total subcription 
+= 1,134.19
+
+incorrect invoice 
+differance on total
+1,134.19 - 654.99
+= 479.2
+Customer is due to be credite total amount of 479.2 this is for the past 2 months
+October and November invoices 2025"
+1784895,R,"Good day 
+FA:505018312
+Customer ID:128043731, isaac mutamba,Consumer
+
+kindly assist the customer has been charged WASP of R63, customer is not aware of the subscription "
+1800301,R,Resolution Protection CUSTOMER MADE PAYMENT NOW R862.88 
+1782448,J,"The South African National Blood Services (SANBS) are experiencing challenges with connectivity on their LTE services due to roaming not being enabled on the plan. The services are in the process of being migrated to enable roaming connectivity. During the month of November 2025, 922 services had no usage due to the customer pausing this project until resolution.
+A credit was requested for services not used by the customer, the breakdown of the credit calculation is as per below: -
+Tariff
+Subscription
+Quantity
+Total Credit
+10gb
+R59.00
+516
+R30 444.00
+20gb
+R99.00
+313
+R30 987.00
+80gb
+R199.00
+93
+R18 507.00
+922
+R79 938.00
+Please assist with approval of a credit on SANBS APN account for R79 938.00.
+BA344822602"
+1789267,J,Customer was charged the subscription fee of R655 without the monthly discount of R166 credited the customer for 2 months 
+1804841,R,"the customer was upgraded her services from R654.99 to the monthly subscription of R1,198.28 however the customer was charged for both services in the current bill"
+1806654,O,"Mr. THERON requested to know why are they billed for something he's not using 91852378
+
+Customer sated that his ADSL line wasn't working for days but he was billed for the whole month, Full monthly subscription 
+
+Case ref no ; 91852378
+
+Customer Notification
+
+Notes: [+27836019490]:Telkom SA: Dear Customer, 
+Ticket ref. 91852378 is created for service  0217615165. We will fix the issue soon.   
+Please do not reply to the SMS."
+1795887,R,"Good day 
+
+Please remove subscription of R79 customer is claiming that he never subscribe "
+1781489,R,Kindly assist Customers bill is R70 more per month due to 0814382682 being charged R70 more on his device subscription. Kindly check July bill and provide credits from July to date as device subscription was not supposed to change from R101 to R171. Calculate and provide credits accordingly. Dispute not for R1
+1790537,R,Resolution Protection - FA
+1777027,R,"Good Day
+Customer id - 120715905
+Affected service - TIN1541502
+Cleint was migrated to fibre on 16 November 2018
+i.e 85 months ago
+Client had inidicated that he needed hi email address
+as well ( textilefreight) 
+Processing agent did not down gradetin to ti mail box and 
+had left tin including internet subscription running
+Cleint has erraneously been charged R288.51 instead of R15.82 if his migartiuon was done correctly
+I have now done order to downgrde service as initially requested.
+Client is requesting cerdit to be passed i.e
+ R288.51-R 15.82 = R 272.69 x 85 months = R 23 178.65
+Kindly econcile accordingly.
+Regards
+Cheyne FRancis"
+1796848,J,"WILHELMUS DUVENAGE.
+0846926423
+Customers monthly subscription is R6142.94 howe current bill cusromer is charged R6654.93. customer disputing extra charges"
+1806708,J,"ARRANGE SUBSCRIPTION OVERCHARGE FROM 01/01/2025 TO 30/11/2025 ON TELKOM FLEX ON 2 & DEVICE = R 359.00 
+good day 
+can you please assist and investigate on the customer’s account was over charged for the month on November customer would like to get a refund for that money been over charged  
+"
+1799589,J,"
+the customer was disputing the subscription fees since the line was done
+i checked on the customer portal and the usage was done since the 5/12/2025 to 23/01/2026 TIN3963176 and therewas no usage
+monthy subscriptionx number of days / time period
+799x 31/60
+412.82"
+1781851,J,Subscription - FA
+1777755,R,"Resolution Protection
+CL Increase 
+awaiting for service desk to log a case"
+1783982,R,Resolution Protection - FA customer made payment of R900.70
+1795689,J,"B350019089 customer wanted to put it on Hold , 
+advised customer that will credit the months that have not been used from September to january = 5 month 
+
+R409 subscription = R 5 month = R409*5  months =R 2 045"
+1779335,J,"Passed dpa 
+customer line was cut off when there made payment on time and telkom charged them for subscription they that why the account was closed "
+1801565,J,"Good day
+
+Please assist and cancel wasps/subscription. client is disputing the R79 that is charged ectra on his fibre account.
+Please assist 79"
+1796427,J,customer was overcharged the subscription of R1299 instead of R449. The charge are on the December 2025 credit memo on hand :
+1803265,R,"Payment Agreement
+
+ 
+
+Customer Query :
+
+Customer would like a payment agreement
+
+Affected Number:
+
+ 0691910099
+
+Alternative Number:
+
+ 0769030260
+
+Customers Name:
+
+ DANISILE KHOZA
+
+ID Number:
+
+ 9205090659083
+
+
+Billing Arrangement:
+
+ 
+
+FA ID Number:
+
+ 506744851
+
+Status of account:
+
+Out Of Collection
+
+Amount in Collection:
+
+ 0.00
+
+Additional Information:
+
+Customer agree on the plan, Customer can to pay R209.00 inclusive of the subscription fee.
+
+Customer agreed on the plan (30/30/40):
+
+ No"
+1803860,O,"Good day
+
+Kindly assist in removing the subscriptions as customer came to the store very irate 
+saying she wants to cancel all her cantracts becouse she's being charded subscriptions 
+she never opted for. Kindly assist with credit and removing them.
+
+Regards "
+1776186,J,"Customer invoice is incorrect has the customer account is being over billed 
+
+Customer has a services line with a monthly subscription of -654.99
+But customer was charged 1,134.19 
+the services number B510011952 is not correct telkom lite uncapped at Retail Fibre BB Lite 50/25Mbps is not 1134.19
+
+calculations 
+monthly services fee / susbcription 
+
+ B510011952 = 1234.96 + 71.52
+=1306.48
+
+Plus the TIN number 
+
+TIN3957532= 155
+
+Minus discounts 
+=327.29
+
+total subcription 
+= 1,134.19
+
+incorrect invoice 
+differance on total
+1,134.19 - 654.99
+= 479.2
+
+Customer is due to be credite total amount of 479.2
+
+
+"
+1781718,J,"Date
+10th December 2025
+To
+Vish Moodley – Senior Manager: Enterprise Sales
+Busi Maboka – Senior Manager: Credit Management
+From
+Sharm Chettiar – Business Development Manager
+Subject
+South African National Blood Services APN– BA344822562
+South African National Blood Services Head Office Zone had 47 users who were incorrectly activated on a Package Deal at R859.00 per month subscription. The correct package is the Package Deal is at R690.00 per month subscription.
+The difference in the monthly subscription to be passed as a credit on the below 47 MSISDNs:
+R859.00 – R690.00 = R169.00 x 47 = R7 943.00 including VAT"
+1782614,R,Resolution Protection CUSTOMER MADE PAYMENT OF R150
+1776669,R,Subscription - FA
+1784562,R,"customer awaiting deicce credit, the amount does not include VAT charged and one months subscription"
+1782841,R,"164177221, John Hein Van der Westhuizen, Consumer
+Subscription - FA 506057168
+BA 341002377
+
+the customer was charged for DSL services for the invoice 1386932428
+
+R2425.05 since the activation of the fibre services since May 2025"
+1778480,J,POA PENDING
+1783790,J,cutomer was mislead by a sales agent that advsied that subscription will still be the same and it has gone up with 431.68
+1787501,J,Subscription - FA
+1787343,R,"please cancel customer amazon prime subscription, customer no longer streams."
+1792624,R,"Subscription - FA
+Cust ID 233992544
+FA 509989535
+
+clinet been charged 
+clinet had no disconnection during the subscription period cycle and was charged R260.21"
+1784564,R,Resolution Protection - FA
+1792116,R,custermer must pay R759 onstead this monthly subscription but she is being charged R1970 for two fibers with the same address 
+1788949,R,"Good day
+Please assist crediting customer for her Subscription fees as Our service is disconnecting customer when connected and we tried all the possibilities to assist with the configuration since she got the line but not working still.
+
+Customer was willing to have more services with us but after the experience she had with the data deal disappointed her she cannot continue with us, please assist crediting her.
+Customer contact details 0764259778
+cindysnyman11@gmail.com"
+1795620,R,"good day
+kindly assist as customer has a active subscription which he never subscribed to. Subscription is for Google Play App and he did not opt in for that subscription. Customer has been paying for the suvscription for more than 5 months and when quiried nothing was resolved. Amount disputing is R4082.35. Subscription was activated when renewal was done on number 0812457466.
+
+Regards"
+1802681,J,"
+
+the customer did not have internet from the 01/12/2025 till 25/01/2026 fault ref no 90478636.
+monthly subscription/number of days x time period
+484/31x5= 874.32"
+1803339,J,"I checked the B260013072 on ip activator the last time the customer was connected was on the 7/12/2026
+Pro-Rata: Subscription / number of days in a month X number of days the line was down
+665/31*25= 536.29 this is for december"
+1798873,J,"Customer called in the fibre was not working for 22 days 
+as they migrated and installed today 22/01/2026
+
+B510040887
+advised customer subscription they pay R409
+
+checked on IP Activator 
+last active was 31 december 2025 . 22 days not being active from 1 january 2026 to 22 january 2026 
+subscription /days of the month *time period 
+R409/31*22= R290,26
+Advised csutome that will credit R290,26"
+1798891,R,Res Protection
+1799075,R,"Resolution Protection pending case 91501695
+customer is waiting for outcome of the case "
+1800225,R,"the customer did not have internet from the 01/12/2025 till 25/01/2026
+monthly subscription/number of days x time period
+484/31x5= 874.32"
+1800908,J,"customer has a new line and his account has the same TIN charged many times thast why his bill has accumulated so much, customer's subscription is R1658.75-r2717.5 = R 1058.75"
+1802897,R,"Payment Agreement
+
+ 
+
+Customer Query :
+
+Customer would like a payment agreement
+
+Affected Number:
+
+ 0817080211
+
+Alternative Number:
+
+ 0823945217
+
+Customers Name:
+
+ Tebogo molelekedi
+
+ID Number:
+
+ 8405270618088
+
+
+Billing Arrangement:
+
+ 
+
+FA ID Number:
+
+ 505970565
+
+Status of account:
+
+Suspended, and the account in collection
+
+Amount in Collection:
+
+5,247.10  
+
+Additional Information:
+
+Customer agree on the plan, Customer can to pay R1000.00 inclusive of the subscription fee.
+
+Customer agreed on the plan (30/30/40):
+
+ No"
+1782342,R,Resolution Protection customer made payment of R350
+1780883,R,"Good day
+
+Please assist with increasing customer's credit from R1000 as her montly subscription is R1,279.00.The application was done for R1279 and the system approved it."
+1777287,R,prime subscriptions that was not subscribed to R79
+1777160,R,Resolution Protection
+1778619,R,"Resolution Protection customer made payment
+a case to be logged by service desk for CL increase"
+1783248,J,"Customer querying the bill why is high as there was a months that the line was not ised 
+Advised customer that usage was not used for the internet for the month of November full month and 14 day of December form the 01 december till 14 
+
+customer subscription is R654,99
+654,99 / 30*30= R654.99
+654,99 / 31*14=295,80
+
+advised customer that will credit the month of November 30 days and December 14 days , total amount to be credit is  R950,79"
+1783728,R,Resolution Protection
+1778718,R,Resolution Protection to cancel customers service
+1782125,J,"Customer wanted the contract to start at the biggining of january but they activted it  on novemeber. no usage was found on IP activator. i am crediting the account for the subscription 489.00
+
+INFO
+No Connection Details were Found"
+1781901,R,resolution protection to restore service received from Jerome
+1777740,R,"Resolution Protection - customer irate 
+
+service desk to log cl increase again"
+1778836,R,"CUSTOMER STATES THAT HIS ON THE CONTRACT AND CLAIMS THAT HIS NORMAL SUBSCRIPTION IS R665.99 AND CUSTOMER SAYS HIS BEEN CHARGE FOR TOOLS HE DIDNOT USE AND HIS BEEN CHARGED R837.41 MR BATHINI IS DISPUTHING R171.42
+
+Kindly assist. Client took out a fibre line 50/25mbps. The contract should R655 yet he is being charged R837.41. Kindly assist to credit the extra charges"
+1786320,J,Subscription - FA
+1783423,J,"CUSTOMER CAME IN TO THE BRANCH CANCEL HER LANDLINE SUBSCRIPTION ADVISED CUSTOMER I CAN PROVIDE FIBRE SERVICES
+
+CUSTOMER HAS  BEEN TRYING TO CANCELL THE LANDLINE SERVICE FOR THE PAST  3MONTHS
+
+KINDLY ASSSIST WITH DISPUTING THE LAQNDLINE SUBSCRIPTION CHARGE DUE TO NO USAGE."
+1784133,R,"Resolution Protection
+customer made payments but bank put incorrect ref number"
+1791415,R,"Good day 
+I trust you are well, 
+
+Kindly asisst with the dispute of R49.00 customer was charged incorrectly for subscription fees.
+
+FA ID:501898009
+
+Thank you 
+Regards"
+1803818,R,"Resolution Protection - customer irate about whole debit order dispute, debit order will go off tomorrow as stated in previous case ""debit order re instated"""
+1790246,J,"164177221, John Hein Van der Westhuizen, Consumer
+Subscription - FA 506057168
+BA 341002377
+
+the customer was charged for DSL services for the invoice 1386932428
+
+R2425.05 since the activation of the fibre services since May 2025"
+1791821,R,"91276102 : Await response from customer
+Customer id - 120715905
+Affected service - TIN1541502
+Cleint was migrated to fibre on 16 November 2018
+i.e 85 months ago
+Client had inidicated that he needed hi email address
+as well ( textilefreight) 
+Processing agent did not down gradetin to ti mail box and 
+had left tin including internet subscription running
+Cleint has erraneously been charged R288.51 instead of R15.82 if his migartiuon was done correctly
+I have now done order to downgrde service as initially requested.
+Client is requesting cerdit to be passed i.e
+ R288.51-R 15.82 = R 272.69 x 85 months = R 23 178.65
+Kindly econcile accordingly.
+Regards
+Cheyne FRancis"
+1786527,R,"Good day
+
+Can you kindly assist in this matter,customer gets on getting subscriptions that they have no idea about"
+1792623,R,"Good day
+
+Can you kindly assist in this matter,customer got billed subscriptions of which they do not use,can you kindly do a manual investigation regarding the issue"
+1787070,R,"Good day 
+
+Kindly assist with disputing the subscription on customer's account and also credit the amount of subscription from June to date on FA NO:509693623 , the amount of R1490.
+
+"
+1797519,J,customer has a new fibre and his was creadited fulll Subscription for his B310190203 number but for his TIN4137287 he was shot creadited with R120.29
+1786889,R,"Good day
+
+Can you kindly assist in this matter.customer's data contract is suspended even though the amount is reflecting on the FA ID,the other customer's two lines are working but the data one is not,under subscriptions the lines shows as active but they not working,also on on the FA ID,it shows that the customer is in collections"
+1790236,R,Change order:2729826107A charging customer incorrectly ((Subscription 1031352208 Vumatel Connection fee BO 1007.76)) Please over ride charges as i do not have the privilege to over-ride
+1803970,J,Customer was double billed on the January  invoice and was upgraded to 200/200 and we did not yet install the router Subscription - FA
+1804707,J,Subscription
+1806003,R,"the customer was upgraded her services from R654.99 to the monthly subscription of R1,198.28 however the customer was charged for both services in the current bill"
+1806376,O,"Resolution Protection - FA 510099659
+reference case 91849658
+
+customer line s suspended "
+1795539,R,"Good day
+
+Customer have two profiles on the system.
+The one profile was created as business(FA: 509874785) and the other as a consumer (FA:  501501085)
+
+There is a Multisim that goes off on the Business FA 509874785, but the rest of the subscriptions reflects on FA 501501085.
+
+Customer wants all his products to deduct on one FA 501501085."
+1801626,J,"good day 
+
+please kindly assist with this customer 
+
+the customer was charged for their subscription
+
+Lite Uncapped (50/25Mbps) 09 Dec 25 - 08 Jan 26 R 155.0
+Invoice noA405338844
+
+new order was made 
+
+customer received a new invoice, invoice number Invoice noA410104516
+
+the customer was charged double the amount of which they have been charged from their previous invoice 
+
+Lite Uncapped (50/25Mbps) 09 Dec 25 - 08 Jan 26 R 155.00Lite Uncapped (50/25Mbps) 09 Jan 26 - 08 Feb 26 R 155.00
+
+customer disputing the 155
+"
+1799507,J,DISPUTE ON SUBSCRIPTION
+1797738,R,Customer disputes charges for watch 7 as he has not received it yet and has been paying for the past full subscription for the past 4 months.  Please assist and contact Mr Cloete on 0845161733.
+1803483,J,"Customer called into dispute 260.21 that was charged on the account dated 11/29/2025
+Customer increase speed and on the 1st October 2646045276A they were suspended because of that change and they were wrongly charged on the invoice of 11/11/2025 an amount of R260.21 on top of their monthly subscription -409.00"
+1790276,R,"Unbilled usage 
+
+Customer called in saying they are being charged for unbilled usage, the customer doesnt know all about this subscription and would like the charges to be remove as the were not aware about them"
+1778916,R,"Resolution Protection-
+service desk to log cl increase"
+1779636,J,"The customer called in requesting feedback regarding the credit she was supposed to get since she never had any internet access from April till september.
+
+The customer was only credit R2,361.56 whilst she had actaully been paying her full month subscription fees. 
+
+The customer would like to fully compensated for the amount of time she had paid with any usage on her line. 
+
+6490.75 - 2,361.56
+= 4,129.19.
+
+The customer is requesting for the total balance to be credit on his account."
+1781876,J,Customer dispute the double charge of R1078 on subscription on 0670771536 for Nov 2025.
+1787934,R,"Good day
+
+Can you kindly assist in this matter,customer mentions that they lost the phone,the subscriptions were not being used,customer asks if its possible to bring down the installments"
+1789479,R,POA ongoing
+1787116,R,"Unable to log protection hence logged subscription due to staff being on leave .
+Sales needs to issue equipment that was not delivered to customer"
+1782722,R,Resolution ProtectionResolution Protection customer made payment of R150
+1800346,J,"Alternative Number:
+ 0823672211
+Customers Name:
+ Bhavish Kara
+ID Number:
+ 9211275193088
+Billing Arrangement:(If Applicable)
+ 345713994
+FA ID Number:(If Applicable)
+ 510726951
+What have you tried:
+ customer states that she has started the contract in DeC 12/9/2025 a per the order number 2709295621A for the below subscription 
+B310191818Telkom Core Fibre Lite
+TIN4142024 Telkom Core Fibre Lite 
+
+The account shows that now customer has ben double billed from the 15 Dec 25 - 14 Jan 26 and the 15 Jan 26 - 14 Feb 26 now customer is double billed yet they have not changed any debit date and the contract is new as the first bill is supposed to be the current bill now customer is billed an amount of R1,309.98 incorrectly double charged yet customer is only supposed to be billed for R654.99 kindly assist to dispute the additional 654.99"
+1806058,O,"Good day, please kindly assist with cancelling service from customer's account. Customer does not want any subscriptions on his account and wants to stop being charged being charged R79. Contact 0827851481"
+1795683,J,"Naidoo Jaice, 0832312345
+ Customer enquiring about the bill. When I checked he is being charged for the landline, anytime extra and has never consent about it. Started in Dec and Jan 2026 invoices. I
+
+Subscription & usage for 0315722059 GC Telkom Endless Fibre R 263.54Subscription services
+Description Period
+Anytime Extra (HOA Gated Community) 12 Jan 26 - 11 Feb 26 R 214.06Closer CallCatcher 12 Jan 26 - 11 Feb 26 R 9.94Normal Jack 12 Jan 26 - 11 Feb 26 R 39.54Subtotal R 263.54
+
+Subscription & usage for 0315722059 GC Telkom Endless Fibre R 263.54Subscription services
+Description Period
+Anytime Extra (HOA Gated Community) 12 Dec 25 - 11 Jan 26 R 214.06Closer CallCatcher 12 Dec 25 - 11 Jan 26 R 9.94Normal Jack 12 Dec 25 - 11 Jan 26 R 39.54Subtotal R 263.54
+
+Subscription & usage for 0315722059 GC Telkom Endless Fibre R 49.48Subscription services
+Description Period
+Closer CallCatcher 12 Nov 25 - 11 Dec 25 R 9.94Normal Jack 12 Nov 25 - 11 Dec 25 R 39.54Subtotal R 49.48
+
+Subscription & usage for 0315722059 GC Telkom Endless Fibre R 49.48Subscription services
+Description Period
+Closer CallCatcher 12 Oct 25 - 11 Nov 25 R 9.94Normal Jack 12 Oct 25 - 11 Nov 25 R 39.54Subtotal R 49.48
+
+R263.54*2 months=R527.08
+"
+1796221,J,"Subscription - FA dispute
+
+
+customer applied for the below mentioned subscription and requested agent to cll effected number : 0817786307
+ 
+Date 11/29/2025
+Order 2699120936A Telkom Stream Connect
+
+agent failed to cancel requested services and the customer was billed for LTE unlimited  effected number : 0817786307 as per FA 509148477
+The cust retained the funds for FA 510726233 and not FA 509148477
+
+no usages for the effected services 0817786307
+please assist to credit FA 510726233 
+Amount : R489"
+1797891,R,"Customer had fibre installed in October, however the fibre did not work properly. Openserve sent out a Specialist, who then arranged for the package to be changed to the Telkom Stream connect, whihc is now working and the customer is happy.
+Customer is requesting for a credit of 2 months subscription.  For further information and supporting emails.  Please contact Gonasagree Rajoo at Vasco 0319419220"
+1786490,R,Customer is disputing the subscription fees as he is unaware of going on month to month after contract has ended.
+1806880,O,"Please assist with removing wasp on this number 0815838478 as the customer did not subscribe to anythng and yet shes being billed, please remove subscription on this affected number"
+1801627,J,"Telkom Number: 0685431279.
+Subscription: 10Mbps LTE All Hours Basic Deal.
+Start date: 15 November 2025.
+End date: 14 November 2027.
+Device:D-LINK AX1500 CAT7 No Voice.
+Status: Suspended.
+Duration: 24 months contract.
+Monthly fees: R369.00
+Susupended from the 16 January 2026 until 28 January 2026.
+R299.00 x 12/31= R 115.74"
+1776071,J,Subscription - FA
+1776959,J,Customer disputes charges for installation and subscription for vumatel fibre as she only has 1 openserve fibre that she has been paying R399 for the past 6 months for. No other installation was done at her premises.  Please investigate and contact Ms Seconds on 0722350791
+1776934,R,"Good Day
+
+Customer id - 120715905
+Affected service - TIN1541502
+
+
+
+Cleint was migrated to fibre on 16 November 2018
+i.e 85 months ago
+Client had inidicated that he needed hi email address
+as well ( textilefreight) 
+Processing agent did not down gradetin to ti mail box and 
+had left tin including internet subscription running
+Cleint has erraneously been charged R288.51 instead of R15.82 if his migartiuon was done correctly
+I have now done order to downgrde service as initially requested.
+Client is requesting cerdit to be passed i.e
+ R288.51-R 15.82 = R 272.69 x 85 months = R 23 178.65
+
+Kindly econcile accordingly.
+
+Regards
+
+Cheyne FRancis"
+1779751,J,"The South African National Blood Services (SANBS) are experiencing challenges with connectivity on their LTE services due to roaming not being enabled on the plan. The services are in the process of being migrated to enable roaming connectivity. During the month of November 2025, 922 services had no usage due to the customer pausing this project until resolution.A credit was requested for services not used by the customer, the breakdown of the credit calculation is as per below: -
+Tariff
+Subscription
+Quantity
+Total Credit
+10gb
+R59.00
+516
+R30 444.00
+20gb
+R99.00
+313
+R30 987.00
+80gb
+R199.00
+93
+R18 507.00
+922
+R79 938.00
+Please assist"
+1777157,R,Resolution Protection - customer made payment today and needs a phone urgently 
+1791880,J,"acc was canceled in Jan 2019 as they moved to a different complex
+Invoice for March 0099683469 -R 238.38 
+ Subscription & usage for 0137458388 Unlimited Home DSL 1 -R 63.64 
+ Subscription & usage for 0137458388_1 Unlimited Home DSL 1 -R 79.75 
+ Subscription & usage for TIN2974445 Unlimited Home DSL 1 -R 107.71 
+ Account subscriptions & once-off charges R 12.72 
+ Total due R 567.63 
+ Due by 27 Apr 2019 R 567.63"
+1795334,R,"Good day
+Please assist ,customer want to cancel his Prime via the app but as it show no active subscriptions link to 0753836961 but it shows on his invoice its link the 0753836961 number .Contact number 0764416171
+
+Kind regards
+Charlene
+"
+1791145,J,"South African National Blood Services Head Office Zone had 47 users who were incorrectly activated on a Package Deal at R859.00 per month subscription. The correct package is the Package Deal is at R690.00 per month subscription.
+The difference in the monthly subscription to be passed as a credit on the below 47 MSISDNs:
+•
+R859.00 – R690.00 = R169.00 x 47 = R7 943.00 including VAT"
+1787003,J,"customers account as the customer was charged double for the device and subscription.
+
+
+Credit to be passed as further investigation via Incident.
+
+10597929 Incident Detail"
+1798379,R,"Payment Agreement
+
+ 
+
+Customer Query :
+
+Customer would like a payment agreement
+
+Affected Number:
+
+ 0670402596
+
+Alternative Number:
+
+ 0670402596
+
+Customers Name:
+
+ Lethabo Maakamedi
+
+
+ID Number:
+
+ 0203115549081
+
+Billing Arrangement:
+
+ 345311624
+
+FA ID Number:
+
+ 510324581
+
+Status of account:
+
+Out Of Collection - on Trial
+
+Amount in Collection:
+
+ 0.00
+
+Additional Information:
+
+Customer agree on the plan, Customer can to pay R500inclusive of the subscription fee.
+
+Customer agreed on the plan (30/30/40):
+
+ No"
+1791875,R,"Good day 
+
+Please asist as with subscription query on account as per client service we only installed on friday and client stated that she is being billed more than what she signed up for. 
+
+Please call client on 0728581414
+
+Regards, 
+Shannon "
+1787132,R,"Good day
+
+Can you kindly assist in this matter,customer has been billed subscriptions that was not actually authorized,installment accumalated by R843 than what the customer is suppose to pay,can you do a manual investigation on your side and cut the subscriptions"
+1795611,J,"Monthly subscription devided by number of days in a month multiply by days without connectivity 2023/02/21
+335.00 devided by 31 days Dec multiply by 3 days R32.42
+335.00 devided by 31 days Jan multiply by 4 days R43.22"

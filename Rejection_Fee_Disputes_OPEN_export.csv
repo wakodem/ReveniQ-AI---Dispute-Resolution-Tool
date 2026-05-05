@@ -1,0 +1,403 @@
+﻿DISPUTE_ID,STATUS,SYS_CREATION_DATE,AMOUNT,TAX_AMOUNT,CREDIT_LEVEL_CODE,CHARGE_CODE,MEMO_TEXT,CATEGORY,CONFIDENCE_SCORE,REQUIRED_ACTION
+1799026,O  ,1/23/2026 8:47,202.7,0.0,ACC,,Customer is a pensioner adviosed them i will credit the rejection fee however they will be liable for the subscription fee / contract fee ,Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806631,O  ,2/4/2026 13:56,1500.0,0.0,ACC,,"good day, 
+
+kindly assist to credit the cleint the stated amount as client signed to pay 600pm but telkom charged him more as result he is incapabale to meet the obligation plus he is a pensioner 
+
+FA 509137126
+BAN 344122285
+
+Regards",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806404,O  ,2/4/2026 9:38,202.7,0.0,ACC,,"Kindly refund customer for the rejection fee that was charged to the customer, but there was money in the account ",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806541,O  ,2/4/2026 12:01,601.0,0.0,ACC,,"Good day,
+
+Please kindly assist with the customer's account
+
+
+
+Customer made a payment on the 22/12/2025 amount of R788.00 and Telkom tried to debit on the 31/12/2025 amount of R399.00
+
+and the customer was charged debit order rejection fee although the payment was already reflecting on the system so now on cuatomer's FA  there's a Pending charge of R399.00
+
+
+Kindly wave off  R399 so that the customer's account can be up to date so that it doesn't affect the credit limit.
+
+
+
+Kindly remove the R399 so that the customer's account can be up to date.",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1806421,O  ,2/4/2026 13:17,608.1,0.0,ACC,,"Good day,
+
+Please assist. Customer's account was not debited for 3 months even though there was money available to deduct. Customer has been making manual payments the whole time through the Telkom App. Customer was then charged penalty rejection fee. Please investigate and advise.
+
+Customer is disputing this amount and would like to be credited please.",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1794511,O  ,1/18/2026 12:46,2684.0,0.0,ACC,,"Good Day 
+Can you please assist with this case .
+Please waive termination penalties and subscription fee for affected service number 0704904668 .
+The service was activat on 27 November 2025 and the customer returned the on the 19 November 2025.
+CPA was done the customer returned the device it was book on vision the job card TCA008741
+Please waive the termination penaltie chagers R2,047.00
+
+
+Device Cyclone CY4 Router 
+IMEI :357655300040540
+OLD CASE 90327258
+CUSTOMER NAME :Moalose Lethata 
+CUSTOMER ID 9508265615081
+",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1804016,O  ,2/2/2026 9:26,202.7,0.0,ACC,,"Good day 
+Please credit R202.70 for debit rejection, Client had funds available in Januaryand December but cTelkom did not debit. Bank statament under ""attachments"" 
+FA 503999697",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1805755,O  ,2/3/2026 8:23,202.7,0.0,ACC,,"Can you please assist to credit the amount of R202.70 for the rejection fee on the 29 Nov 2025, the last day fell over the weekend therefore client funds only went into is account on the 1 Dec 2025
+
+FA: 510416324
+Alt no: 0814955207",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1804923,O  ,2/2/2026 10:35,409.2,0.0,ACC,,"Good day
+
+I trust you are well.
+
+Kindly assist with a credit for this client as she is disputing the rejection fees.
+
+Client had funds in her account when the debit order went off but it was returned for some reason. Client is extremely upset and wants to refunded for the extra charges.",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806555,O  ,2/4/2026 12:24,260.21,0.0,ACC,,"Good day
+
+please assit in credit account as this customer services was never off and get charge for reconection fee
+
+however cusromer complain abount device insurance that was never agree 
+ only R550 was credit and not the full amount please assit as customer call the call centre but noone can explain about this bill
+
+customer is pensioner and cant pay this amint of land line services
+
+thank you",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1804737,O  ,2/1/2026 12:09,1.0,0.0,ACC,,"Billing query 
+
+customer  states that she canceled her contract on th e7th of March 2023
+
+however customer was charged  until November 2023
+
+customer would like to know where does the other balances come from 
+
+customerws account was debited 
+affected number 0812157142
+identity number 8904120161083
+customers name Laurique Rochelle Walstroom 
+contact number 0812157142
+
+In Collection since 3/8/2023   1,005.93 
+
+
+
+
+
+
+Search
+
+FA_ID
+ 	
+
+
+
+
+
+
+
+
+
+Collections Not Found
+
+Collected Amount	
+      
+Search_FA      
+502676403
+Last Successful Date	
+  FA_Number 
+502676403
+ 	Arrears	
+R 1005,93
+Cus_Names   
+Laurique Rochelle Walstroom
+Total Due	
+R 1005,93
+   
+Last Debit Order Rejection Date	
+2023-03-02
+
+Rejection Reason	
+NOT PROVIDED FOR (EQUIVALENT TO R/D ON A CHEQUE)
+All Collections Transactions For The last Three Months
+Group	Amount	Action_Date	Status	Latest_Status_Description	Lastest_Status_Effective_Date
+Bham & Dahya WO (EFT)	1005,93	2026-01-31	Submitted	Submitted To the Bank	2026/01/31 00:00:00
+Bham & Dahya WO (EFT)	1005,93	2026-01-24	Failed	NOT PROVIDED FOR	2026/01/28 00:00:00
+Telkom Bham & Dhaya EFT 2	500,00	2025-12-31	Successful	SUCCESSFUL	2026/01/01 00:00:00
+Telkom Bham & Dhaya EFT 2	500,00	2025-12-20	Failed	NOT PROVIDED FOR	2025/12/29 00:00:00
+Telkom Bham & Dhaya EFT 2	1000,00	2025-12-20	Failed	NOT PROVIDED FOR	2025/12/29 00:00:00
+Telkom Bham & Dhaya EFT 2	1505,93	2025-12-13	Failed	NOT PROVIDED FOR	2025/12/18 00:00:00",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806894,O  ,2/5/2026 9:51,202.7,0.0,ACC,,"good day 
+kindly assist with rejection fees as clients debit order was changed.",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1806472,O  ,2/4/2026 9:57,202.7,0.0,ACC,,"Good day , Kindly please find attached bank statement , customer had enough funds on  29/11/2025 and she was still charged for payment rejection fee. Please kindly dispute this, customer contact on 0631754179",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806377,O  ,2/4/2026 11:39,3360.0,0.0,ACC,,"CREDIT MEMORANDUM 
+Date:							 04/02/2026                                                      
+Customer Name: 				               Gino Overmeyer
+Channel: 						Call center                    
+CC Name:						Selldirect                   
+Linked agent (selling or processing, cause of issue):	SDM1234-111+
+Linked manager:					N/A
+BA and FAID:						334183721, 500835651
+Order Number for Cancellation:  			2745466904A
+Order Number for Activation:   				2695512852A
+Incident Number if Applicable:  				N/A
+Job Number if Applicable: (device collection):		N/A                             
+Reason for credit request: 				Device Obligation / Carryover
+
+Selldirect renewed affected number 0814766534 on 25/11/2025: Telkom_FlexOn_2_TopUp_Deal with device Honor X6B 128GB Midnight Black, IMEI: 864193075137461. Selldirect sent a cancellation request that customer is no longer interested and device was collected on waybill 88817133809, contract was cancelled on 26/01/2026.
+
+ Reason for Credit  	Affected Number:  	Amount  
+Device Obligation / Carryover: R3,080.00
+Usage found in Dec 2025 and Jan 2026: 0814766534
+Device Subscription Fee: R140.00x2 = R280
+Total: R3,360.00	0814766534	R3,360.00
+Total to be Credit  		R3,360.00
+ 
+",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1804743,O  ,2/1/2026 12:47,202.7,0.0,ACC,,"Good day
+
+Customer's debit order did not go off at the end of November 2025, but she left money in her account.
+A penalty charge of 202.70 was added on her account.
+Kindly assist
+Bak statement attcatched on system",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806825,O  ,2/5/2026 9:01,176.26,26.44,DEB,DCK,"Affected Number:0725497569
+Alternative Number:0680028610
+Customers Name:MASASE NOBELA MASASE
+ID Number:0002246296087
+Billing Arrangement:341635191
+FA ID Number:506686574
+What have you tried:Customer made an advance payment in November and should not been charge a rejection fee , there was no payment missed backout occured due to failure of debit from telkom side but customer made a payment before telkom could debit .
+Additional Information:11/1/2025 Payment -450.00",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806098,O  ,2/3/2026 17:19,202.7,0.0,ACC,,"Good Day Team 
+
+Kindly assist the customer with disputing the 202.70 charged on her bill as she had enough funds on her account Telkom tried to Debit 169.08 on the 31 December 2025 but the Debit order bounced the customer had 245.21 on her account please try to assist
+Affected number 0681297122
+Alternative number 0656815853
+Customer ID 100140920
+
+Regards.",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806485,O  ,2/4/2026 10:17,202.7,0.0,ACC,,"Good day 
+
+Kindly assist as the customer was debited on the incorrect date 
+Customer wants to be debited on the 5th of every month and apparently he was debited on the last day.
+And customer was charged a debit order rejection fee.
+Please remove the R202.70 rejection fee ",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1804576,O  ,1/31/2026 9:45,279.0,0.0,ACC,,"Kevin Tendo Nkone
+Customer is requesting a payment extension of 15 day, advised wil end on the 14th/02/2026 and he agreed. The resaon is that he loas his job.
+
+Payment arrangement.	Payment extension
+Customer Query :	Customer would like a payment arrangement /extension
+Affected Number:	0601952385
+Alternative Number:	0722562497
+Customers Name:	Kevin Tendo Nkone
+ID Number:	9906195054084
+Billing Arrangement:	344984804
+FA ID Number:	509998010
+Status of account:	active and the account is not in collection.
+Amount in Collection:	none
+Additional Information:	Customer did agree on the plan, Customer can only afford to pay R279.00 inclusive of the subscription fee.
+Customer agreed on the plan (30/30/40):	e.g. Yes or No
+",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1805819,O  ,2/3/2026 10:40,202.7,0.0,ACC,,"Good day.
+
+Kindly assist by looking into the customers profile as a rejection fee of R202.70 was charged for dedit order failure on December 2025 and there were sufficient funds in the customer personal bank account. Bank statement attached on mobile CRM. 
+
+Thank you.",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806645,O  ,2/4/2026 14:51,404.0,0.0,ACC,,"Good day - please investigate client is disputing the 2 debit order rejection 29th Nov 2025 Ref Telkommobi505951079 01184859153 and 1st Jan 2026 ref EDT505951079A260115 (RTD- Not provided for Telkommobi)
+Affected no. 0814227986
+FA 505951079
+BA 340896288
+Nazley Anthony",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806680,O  ,2/4/2026 15:04,202.7,0.0,ACC,,"Good Day 
+
+Can you please assist, customer has been charged a R202.70 for a debit order rejection fee but the funds was available in the account for Telkom to deduct.
+
+Can you please assist in creditting the account with R202.70 
+
+FA ID: 504650700
+BA ID: 339595906
+
+Kind Regards",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1805894,O  ,2/3/2026 12:01,195.7,0.0,ACC,,"Good Day.
+Can you please assist in wavering clients rejection fee, client has been making payments on time every month. but still bieng bill for rejection fee.
+Billing Arrangement 335488101
+Financial Account 502040307",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1786644,O  ,12/30/2025 15:31,0.1,0.0,ACC,,"Billing Case	
+Affected Number:	0733834926
+Alternative Number:	0834401683
+Customers Name:	ARSHAD NANA 
+ID Number:	8303305044083
+Billing Arrangement:	345053818
+FA ID Number:	510066917
+What have you tried:	I checked on the customers profile for their captured details 
+also if there were correct or rectified. I also verified the account details 
+On AVS and the account is invalid.
+Additional Information:	Customer would like to dispute termination penalties that were charged on their invoice 
+As they did not request any termination of their contract. The customers company details were not captured correctly 
+Causing an inconvenience of missed debit order and rejection fee charges. 
+Customer would like to also have their 0733834926 reinstated.  
+Also the customers services have been suspended  since 4/23/2025 and would like a discount on the charges for the benefits 
+That they were unable to use thereafter.",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1804635,O  ,1/31/2026 12:57,202.7,0.0,ACC,,"The customer was due to be debited R209 on 31 October 2025 with a remaining balance of R321 in the Bank Account to which the transaction failed to deduct, resulting in an additional debit order rejection fee of R202.70 on the following months bill in which R662.48 was deducted
+Please refer to the attached bank statement for reference",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1801584,O  ,1/27/2026 11:14,1469.0,0.0,ACC,,"Billing Template
+
+ 
+
+Affected Number:
+
+0685073700
+
+Alternative Number:
+
+ 0788402056
+
+Customers Name:
+
+ Vusumuzi Lawrence Ndlovu
+
+ID Number:
+
+9304165723088
+
+
+Billing Arrangement:(If Applicable)
+
+ 
+
+FA ID Number:(If Applicable)
+
+ 505815447
+
+What have you tried:
+
+ crm
+
+Additional Information:
+
+cx wants to know why he paid 
+
+Subscription & usage for 0685073700 40GB LTE Deal R 1,475.63Subscription services
+Description Period
+40GB LTE Wireless 01 Dec 25 - 31 Dec 25 R 169.00Device Subscription Fee 01 Dec 25 - 31 Dec 25 R 1,300.00Subtotal R 1,469.00
+
+instead of the normal bill of 
+
+Subscription & usage for 0685073700 40GB LTE Deal R 826.58Subscription services
+Description Period
+40GB LTE Wireless 01 Jan 26 - 31 Jan 26 R 169.00Device Subscription Fee 01 Jan 26 - 31 Jan 26 R 650.00Subtotal R 819.00",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1804978,O  ,2/2/2026 12:18,810.8,0.0,ACC,,"Good day
+
+Kindly assist with crediting customer rejection fee for 4x months (Aug 2025, Nov 2025, 22 Dec 2025 & Jan 2026), reason for rejection was due to insufficient funds however as per customer bank statement funds were available, please note that i have checked and these are the only months that we are incorrectly charging customer, the others had been explained to customer and customer doesnt mind paying what she is at fault for however would like to be creditied for the fault on telkom side.
+Bank statement attached ref to dispute 
+Please mail Willag7@telkom.co.za for any additional docs or info",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806108,O  ,2/3/2026 16:03,202.7,0.0,ACC,,"Good day 
+
+Please kindly assist by not charging the customer with R202.70 as the debit order rejected in December but yet the cutsomer had money in their account.
+Kindly view the bank statement attached on the system as proof.
+",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1803375,O  ,1/31/2026 13:04,202.7,0.0,ACC,,"Good Day 
+
+May you please assist with a debit order rejection  dispute  due to the customer came in october 2025 to change her date with me msizak at Telkom Wonderboom  to the last day of the month but seems like the changes did not take effect as we did the change ",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1802712,O  ,1/27/2026 13:44,1.0,0.0,ACC,,"Billing Case
+ 
+Affected Number:
+ 0752412042/0659657736
+Alternative Number:
+ 0679765938
+Customers Name:
+ NOTHANDO KHWELA
+ID Number:
+ 9210160709081
+Billing Arrangement:(If Applicable)
+ 344092483
+FA ID Number:(If Applicable)
+ 509107545
+What have you tried:
+ 
+Additional Information:
+ Customer was charge R202.70 which she is disputing the charges....customer wasn't debited ",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1806141,O  ,2/3/2026 17:15,202.7,0.0,ACC,,"Good Day
+Kind assist with waiving the charges,
+The customer was a wrongfully charged but it was rectified and now there's a rejection Fee of R202.70",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806080,O  ,2/3/2026 15:11,242.0,0.0,ACC,,please credit customers account customer gets pensioners rebate but she did not receive rebate between the months of may and june,Rejection Fee Dispute,0.85,Outcome pending – DB check required.
+1806105,O  ,2/3/2026 16:53,202.7,0.0,ACC,,"Good Day
+
+Please assist customer would like to dispute penalty fee of november as he had enough fund in his account penalty fee R202.70 please find attached customer bankstatement on CRM thank you",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1806007,O  ,2/3/2026 12:25,202.7,0.0,ACC,,"Customer had a backout on 31.01.2026 for R419.00 but there were funds available on the account, customer will make a manual payment for the subcription, kindly assist with waiving rejection penalties of R202.70",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1805035,O  ,2/2/2026 13:22,202.7,0.0,ACC,,"Good day
+
+Customer wants to dipsute the rejection fee of R202.7 on their account because Telkom did not attempt to debit their account. 
+Only the payment rejection is appearing on the account.
+Attached customer's bank statement",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1806603,O  ,2/4/2026 13:53,46291.0,0.0,ACC,,"Customer's credits which enables her to pay her subscriptions of r799 are not allocated in time and thus have her incur insufficient funds on her account and customer been billed that concurrently for the past 3 months,as discounts credits are allocated late.
+reconnection fee r260.21
+rejection fee r202.70",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1800292,O  ,1/26/2026 14:33,630.0,0.0,ACC,,"Kindly assist, client is quering why has her device subscription fee has moved from R100 to R730. She did not make changes to her account but this month we charged her R730 instead of R100 for this month's invoice",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1803870,O  ,2/1/2026 10:52,1506.7,0.0,ACC,,"Client has been charge for rejection in the month of jan 2026 for payments that has beem missed in previous months 
+however client has suffecient amount of funds for the debit order to go off the amount that has been taking off the acount in jan 2026 was R 1,506.70 this included R202.70 rejection feed that should be disputed and be refunded 
+
+please advise the way forward ",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1805086,O  ,2/2/2026 14:35,405.4,0.0,ACC,,"Good day
+
+Please assist with dispute on rejection fees on 15 December 2025 and 15 January 2026 as the money was in sufficient in the customer bank account but it was not deducted as per bank statement. 
+Please see attached bank statement on CRM.
+
+Kind regards
+Emihle",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1805876,O  ,2/3/2026 12:11,202.7,0.0,ACC,,"Good day 
+
+Kindly assist as the customer was charged for a rejection fee of R202.70 for December however the customers debit order was successful on 31.12.2026. Please see attached proof of payment showing the debit order going off successful.
+
+Kind regards",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806045,O  ,2/3/2026 13:52,202.0,0.0,ACC,,"good day
+
+the customer would like to dispute a debit rejection fee which has been caused by not debiting him though he always has enough funds in his account for the debit to run . the bank statement has been attached to support the claim ",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806815,O  ,2/5/2026 8:43,899.0,0.0,ACC,,"Incoming call
+Contact Phone: 0745792380
+
+Notes: Good day.
+
+Please assist with wavering debit order rejection fee of R202.70 as customer was advised by billing departmrnt to go make a mauel payment into the FA Account the issue is that the customer made the payment before the debit order date, whic then reluted in the debit order rejecting.
+
+Kind regards
+Sine",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806570,O  ,2/4/2026 12:44,202.7,0.0,ACC,,"Good day 
+
+Hope all is well 
+
+Kindly assist with disputing debit order rejection fee as there was money available in customer's account.
+
+Kindly see attached statement.",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1805848,O  ,2/3/2026 11:50,687.0,0.0,ACC,,"FTR JAN:Called 0764202689 spoke to Mr  Dakisele Motube as per cust they wer paid late so there was no funds ,advised of D/O  rejection fees and interet  ,EXC succesfully collected R687.00 account  protected via 75 disp  till paymnt reflests on NGN.Bongi  0415050013.",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1805802,O  ,2/3/2026 10:22,202.7,0.0,ACC,,"Deibit order rejection on 31.01.2026 but there were funds available on the account, please assist with crediting R202.70 rejection fee, bank statent attached",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1806396,O  ,2/4/2026 9:12,202.7,0.0,ACC,,"Good day,
+
+Please assist with payment rejection fee dispute of R202.70 as the customer did a renewal and paid the amount in advance. The agent that did th renwal did it as a replace offer casuing the confusion in the billing. 
+
+BA :343785755
+FA : 508800955
+
+Thank you",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1806544,O  ,2/4/2026 12:06,405.4,0.0,ACC,,"Customers account details were incorrect
+Customer had one digit incorrect on bank account detail it has been corrected now, customer should not have been charged rejection fee",Rejection Fee Dispute,0.97,Outcome pending – DB check required.
+1805578,O  ,2/3/2026 16:51,202.7,0.0,ACC,,"Good Day
+
+Please assist customer would like to dispute penalty fee of november as he had enough fund in his account penalty fee R202.70 please find attached customer bankstatement on CRM thank you",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1806431,O  ,2/4/2026 17:18,202.7,0.0,ACC,,"Good day
+Please kindly assist the customer is disputing the rejection fee of R202.7 for late payment. Her account shows that enough money was there for her dibit order to go off.
+
+Bank statement is attached on CRM
+FA: 509002666
+Contact number: 0717227521",Rejection Fee Dispute,1.0,Outcome pending – DB check required.
+1805229,O  ,2/3/2026 14:40,202.7,0.0,ACC,,"Greetings 
+
+Please kindly assist with waving of rejection fee charges as customer changed banking details in november and paid manually before debit date.
+
+Kind Regards",Rejection Fee Dispute,0.95,Outcome pending – DB check required.
+1806400,O  ,2/4/2026 9:25,202.7,0.0,ACC,,"Please assist with creditng customer R202.70, customer's debit order date is set for the last day of the month but customer was debit on the 25th of january and when the debit order was rejected she was charged the rejection fee, please no that the customer only gets paid on the 26th of the month hence the debit order date is the last day of the month",Rejection Fee Dispute,0.99,Outcome pending – DB check required.
+1806492,O  ,2/4/2026 10:26,202.7,0.0,ACC,,"The customer activated the contract on 25 November 2025 was supposed to be debited on the 15 December 2025 R488, However, Telkom deducted R488 on the 31 December 2025 when customer had an insufficient balance resulting in a late payment rejection fee of R202.70 which will be due on 15 Febuary 2026",Rejection Fee Dispute,1.0,Outcome pending – DB check required.

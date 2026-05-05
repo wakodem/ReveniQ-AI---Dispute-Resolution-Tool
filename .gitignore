@@ -1,0 +1,13 @@
+# ReveniQ AI - Do not commit local config or caches
+# Digital COE Gen AI Team
+
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.eggs/

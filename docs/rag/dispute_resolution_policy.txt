@@ -1,0 +1,533 @@
+# Dispute Resolution Policy and Guidance
+# ============================================================
+# PURPOSE: RAG knowledge base for AI-assisted dispute resolution.
+#          The AI uses relevant sections to guide CSR / back-office
+#          agents to APPROVE or REJECT a dispute.
+#
+# HOW TO EXTEND:
+#   - Add a new "## Category Name" section below for each dispute type.
+#   - For categories that require SQL validation, include a
+#     "### SQL Validation Steps" subsection.
+#   - Each SQL step MUST reference where its input values come from
+#     (e.g., "[Uses account_id from Step 1]") so the AI retains
+#     context across RAG chunks.
+#   - Add the category name to REVENIQ_AI_SQL_CATEGORIES in .env
+#     (e.g., REVENIQ_AI_SQL_CATEGORIES=Rejection Fee Dispute,Duplicate Billing).
+#     Category names in .env MUST match the CATEGORY column in your dispute data.
+#
+# ============================================================
+
+
+## Rejection Fee Dispute
+
+### Overview
+A rejection fee (charge code = 'DCK') is raised on a customer account when a
+Direct Debit (DD) payment is returned / rejected by the bank. The bank rejection
+causes the original DD payment to be automatically backed out (ACTIVITY_TYPE = 'BCK').
+A customer may dispute this fee if they had already made a cash payment before the
+DD due date. The AI must validate whether the conditions for approval are met by
+executing the SQL steps below in order.
+
+### Key Terms and Codes
+- PAYMENT_METHOD 'CA'  = Cash payment
+- PAYMENT_METHOD 'DD'  = Direct Debit payment
+- charge_code    'DCK' = Rejection fee charge
+- ACTIVITY_TYPE  'BCK' = Payment backout / reversal event
+- REVERSAL_REASON 'BCK'= Backout reason code on payment details
+- STATUS         'O'   = Open dispute (pending resolution)
+
+### Payment Types
+- Payments can be posted as:
+  - Cash Payment        → PAYMENT_METHOD = 'CA'
+  - Direct Debit Payment → PAYMENT_METHOD = 'DD'
+
+### Backout Logic
+- Direct Debit payments are automatically backed out when rejected by the bank.
+- Cash payments are usually backed out manually by a user.
+- Rejection fee charge code = 'DCK'.
+- A rejection fee backout is recorded in:
+  - AR1_PAYMENT_DETAILS.REVERSAL_REASON = 'BCK'
+  - AR1_PAYMENT_ACTIVITY.ACTIVITY_TYPE  = 'BCK'
+
+### Approval Criteria (Policy)
+A Rejection Fee Dispute is APPROVED ONLY IF ALL of the following are true:
+  1. A BCK (backout) event exists for the account.
+  2. A DCK (rejection fee) charge was created for the account.
+  3. A Cash payment (PAYMENT_METHOD = 'CA') exists with a deposit_date
+     BETWEEN AR1_DIRECT_DEBIT_REQUEST.EXTRACT_DATE
+         AND AR1_DIRECT_DEBIT_REQUEST.DUE_DATE (inclusive).
+
+REJECT if ANY of the following are true:
+  - No BCK event found for the account.
+  - No DCK charge created for the account.
+  - No cash payment at all during the DD extract-to-due_date window.
+
+### Edge Cases
+- Boundary dates: BETWEEN is inclusive; a cash payment on exactly extract_date
+  or exactly due_date qualifies for approval.
+- No open dispute found in Step 1: Halt execution and flag for manual review.
+  Do NOT proceed with subsequent steps.
+- Multiple DCK charges: Any DCK charge linked to the correct pay_channel_no
+  and effective_date satisfies the condition.
+- Null extract_date or due_date in direct debit request: Flag for manual review;
+  cannot determine the qualifying window.
+
+### Manual Review Triggers — “Funds Were Available” / Bank Statement Claims (Rejection Fee)
+Use this subsection when the dispute memo (or customer narrative) indicates the customer
+believes their bank account had enough money to cover the debit, or that Telkom failed
+to debit despite available funds. These cases are NOT decidable from the standard
+“cash payment between extract_date and due_date” rule alone. The bank’s return reason,
+timing, weekend/public-holiday alignment, duplicate or missed collection attempts,
+and third‑party statement evidence must be checked by a human or specialist process.
+
+#### When to route to Manual Review (mandatory)
+Classify as **Manual Review** when ANY of the following intent signals appear in the memo
+or attachment notes (paraphrases and spelling variants count):
+
+- Customer says **money was in the account**, **funds were available**, **sufficient funds**,
+  **enough balance**, **had funds when the debit went off**, or **balance covered the debit**.
+- Customer says the **debit order returned / bounced / rejected** even though **funds were there**.
+- Customer provides or references a **bank statement** (attached on CRM, email, mobile CRM)
+  to prove **available balance** on the debit date or around the rejection event.
+- Customer claims **Telkom did not debit** / **no debit attempt** / **wrong debit date**
+  while asserting **funds were available** in the stated period.
+- Customer claims **funds were available for months** but **no successful debit**,
+  sometimes with **penalty rejection fees** stacking.
+- Customer disputes **insufficient funds** as the reason, saying the bank statement
+  shows **funds were available** (contradiction between bank narrative and billing system).
+
+#### Phrase clusters for retrieval (embedding-friendly synonyms)
+Group A — balance / availability:
+  “money in the account”, “funds in the account”, “funds available”, “sufficient funds”,
+  “enough funds”, “enough money”, “had balance”, “remaining balance in the bank account”,
+  “client had funds”, “money was there for the debit”.
+
+Group B — event mismatch:
+  “debit order went off but returned”, “debit rejected although money available”,
+  “DD bounced but funds there”, “transaction failed to deduct”, “Telkom did not debit”.
+
+Group C — evidence:
+  “bank statement attached”, “statement on CRM”, “proof attached”, “see attached statement”,
+  “circled on statement”, “POP attached”.
+
+#### Representative memo patterns (training / RAG examples)
+The following are stylistic templates seen in live disputes; they all imply **Manual Review**:
+
+1. Refund or credit requested because **rejection fee was charged but there was money in the account**.
+2. **Client had funds when the debit order ran** but the payment was **returned for an unknown reason**;
+   customer is distressed.
+3. **Bank statement attached**; customer **had enough funds on [date]** but was still charged
+   **payment rejection fee**; asks to dispute or reverse the fee.
+4. **Sufficient funds in the customer’s personal bank account**; **bank statement on mobile CRM**.
+5. Credit the **rejection fee**; **funds were available** in **January and December** but
+   **Telkom did not debit**; statement under attachments.
+6. Charged **R202.70 rejection fee** but **funds were available for Telkom to deduct**.
+7. **Debit rejected** in [month] **yet customer had money in the account**; review **bank statement on the system**.
+8. Customer **had enough funds**; **bank statement on CRM** for the debit / penalty period.
+9. **Funds available on the account**; request to **waive or credit** rejection **penalty R202.70**;
+   **bank statement** supplied.
+10. Dispute **rejection fee** because **money was available**; **attached statement**.
+11. Account / statement shows **enough money for the debit order to succeed**; **statement on CRM**.
+12. **Balance in account** (e.g. specific amount) when debit failed; **refer to bank statement**.
+13. Bank shows **rejection reason insufficient funds** but customer says **statement proves funds available**
+    — requires reconciliation.
+14. **Always enough funds** for the debit; **bank statement attached** to support the claim.
+15. **Not debited for multiple months** though **money was available to deduct**; **penalty rejection fee** charged.
+
+#### Agent and AI guidance
+- Do **not** treat these memos as automatic **APPROVE** or **REJECT** using only the standard
+  SQL path in this document. Mark **Manual Review** and record the trigger phrases.
+- Required evidence for resolution typically includes: **bank statement** for the relevant dates,
+  **DD extract/due dates**, **return reason codes** from collections / bank, and whether
+  **Telkom attempted debit** on the correct date and amount.
+- If the only approved path in policy is a **cash (CA) payment in the DD window**, but the
+  customer’s story is strictly **“funds sat in the bank account”** without a qualifying CA
+  payment, that is a **process mismatch** — still **Manual Review**, not a blind REJECT
+  without checking return codes and debit attempts.
+
+### SQL Validation Steps
+-- NOTE: All SQL uses -- for inline comments (ANSI standard).
+-- Execute steps in order. Each step documents where its input values come from.
+-- Replace ? placeholders with actual values obtained from the previous step.
+
+-- STEP 1: Get account_id for the open dispute.
+-- Input  : dispute_id supplied by the application.
+-- Output : account_id → used in Steps 2, 3, 5a, 5b, 5c, 5d.
+SELECT *
+FROM   ar1_dispute
+WHERE  STATUS     = 'O'
+AND    dispute_id = ?;          -- substitute actual dispute_id
+
+-- STEP 2: Find the most recent payment backout (BCK) on this account.
+-- Input  : account_id from Step 1.
+-- Output : credit_id, last_bck_payment_date → used in Steps 5a and 4 (as effective_date).
+-- If no rows returned → REJECT (no BCK event exists).
+SELECT account_id,
+       credit_id,
+       activity_date AS last_bck_payment_date
+FROM (
+    SELECT account_id,
+           credit_id,
+           activity_date,
+           ROW_NUMBER() OVER (
+               PARTITION BY account_id
+               ORDER BY activity_date DESC
+           ) AS rn
+    FROM   ar1_payment_activity
+    WHERE  account_id    = ?    -- account_id from Step 1
+    AND    activity_type = 'BCK'
+) bck
+WHERE bck.rn = 1;
+
+-- STEP 3: Get the pay_channel_id for this account.
+-- Input  : account_id from Step 1.
+-- Output : PAY_CHANNEL_ID → used in Step 4 as pay_channel_no.
+SELECT PAY_CHANNEL_ID
+FROM   ar1_pay_channel
+WHERE  account_id = ?;          -- account_id from Step 1
+
+-- STEP 4: Confirm that a DCK (rejection fee) charge was created.
+-- Input  : PAY_CHANNEL_ID from Step 3 (used as pay_channel_no).
+--          last_bck_payment_date  from Step 2 (used as EFFECTIVE_DATE).
+-- Output : Existence of a DCK charge row.
+-- If no rows returned → REJECT (no rejection fee was raised; nothing to dispute).
+SELECT *
+FROM   bl1_charge_request
+WHERE  pay_channel_no  = ?      -- PAY_CHANNEL_ID from Step 3
+AND    charge_code     = 'DCK'
+AND    (effective_date = ? OR effective_date = ? + 1);  -- both ? values = last_bck_payment_date
+
+-- STEP 5: Check whether a qualifying cash payment exists.
+-- This step has four sub-queries executed in sequence.
+
+-- STEP 5a: Get payment record(s) for this account linked to the BCK credit.
+-- Input  : account_id from Step 1, credit_id from Step 2.
+-- Output : payment_id → used in Step 5b.
+SELECT *
+FROM   ar1_payment
+WHERE  account_id = ?           -- account_id from Step 1
+AND    credit_id  = ?;          -- credit_id from Step 2
+
+-- STEP 5b: Get payment detail with reversal_reason = 'BCK' to find the
+--          Direct Debit voucher number.
+-- Input  : account_id from Step 1, payment_id from Step 5a.
+-- Output : DIRECT_DEBIT_VOUCHER → used in Step 5c.
+SELECT *
+FROM   ar1_payment_details
+WHERE  account_id      = ?      -- account_id from Step 1
+AND    payment_id      = ?      -- payment_id from Step 5a
+AND    reversal_reason = 'BCK'; -- confirms this is the DD backout record
+
+-- STEP 5c: Retrieve the rejected Direct Debit request to get the
+--          qualifying date window.
+-- Input  : account_id from Step 1, DIRECT_DEBIT_VOUCHER from Step 5b.
+-- Output : EXTRACT_DATE, DUE_DATE → used in Step 5d.
+-- If no rows returned → Flag for manual review (missing DD request record).
+SELECT *
+FROM   ar1_direct_debit_request
+WHERE  account_id           = ?  -- account_id from Step 1
+AND    DIRECT_DEBIT_VOUCHER = ?; -- DIRECT_DEBIT_VOUCHER from Step 5b
+
+-- STEP 5d: Check if a cash payment (CA) was made within the qualifying window.
+-- Input  : account_id from Step 1.
+--          EXTRACT_DATE from Step 5c.
+--          DUE_DATE     from Step 5c.
+-- Output : Existence of a cash payment row in the qualifying window.
+-- If rows returned → APPROVE.
+-- If no rows returned → REJECT.
+SELECT *
+FROM   ar1_payment_details
+WHERE  account_id      = ?           -- account_id from Step 1
+AND    deposit_date    BETWEEN ?     -- EXTRACT_DATE from Step 5c
+                           AND ?     -- DUE_DATE from Step 5c (inclusive)
+AND    payment_method  = 'CA';
+
+### Decision Rules Summary
+After executing all SQL steps, apply this decision matrix:
+
+| Condition                                              | Decision        |
+|--------------------------------------------------------|-----------------|
+| Memo matches “funds available / bank statement” triggers (see subsection above) | Manual Review first |
+| Step 1 returns no open dispute                         | Manual Review   |
+| Step 2 returns no BCK event                            | REJECT          |
+| Step 4 returns no DCK charge                           | REJECT          |
+| Step 5c returns no DD request record                   | Manual Review   |
+| Step 5d returns cash payment within extract–due window | APPROVE         |
+| Step 5d returns no qualifying cash payment             | REJECT          |
+| extract_date or due_date is null                       | Manual Review   |
+
+### Audit / Notes for Agent
+- Always record which SQL steps were executed and their outcomes in the
+  dispute audit log before submitting an Approve / Reject decision.
+- For Manual Review cases, escalate to the senior back-office team with
+  the step number and reason for escalation.
+
+
+## Late Payment / Interest Dispute
+
+### Overview
+A late payment fee (charge code = 'LATE_PYM') is raised when a customer pays their
+bill after the billing due date. However, there are cases where the payment was
+received on time but posted in the system after the due date — in such cases, the
+charge should be credited. The deposit_date in ar1_payment_details reflects the
+actual payment date, while SYS_CREATION_DATE reflects when the payment was recorded
+in the system.
+
+### Key Terms and Codes
+- charge_code     'LATE_PYM' = Late payment fee charge
+- BALANCE         = Outstanding balance on the charge group
+- RESTRICTION_AMOUNT         = Amount already credited against the charge
+- DEPOSIT_DATE               = Actual date payment was received
+- SYS_CREATION_DATE          = System posting date of the payment
+- DUE_DATE                   = Billing due date from the charge group
+
+### Approval Criteria (Policy)
+A Late Payment / Interest Dispute is APPROVED ONLY IF ALL of the following are true:
+  1. A LATE_PYM charge exists for the account linked to the dispute.
+  2. The account balance (BALANCE) on the charge group is zero (fully paid).
+  3. No prior credit (RESTRICTION_AMOUNT = 0) has been applied to the charge.
+  4. A payment exists where PAYMENT_CREATION_DATE (SYS_CREATION_DATE) is on or
+     before the DUE_DATE — meaning the payment was received on time but possibly
+     posted late in the system.
+
+REJECT if ANY of the following are true:
+  - Outstanding balance (BALANCE > 0) remains unpaid as of the due date.
+  - A credit (RESTRICTION_AMOUNT > 0) has already been applied to the charge.
+  - The payment was received (PAYMENT_CREATION_DATE) after the due date.
+
+### Manual Review Triggers
+Route to MANUAL REVIEW when:
+  - No matching LATE_PYM charge is found for the dispute (reason code: NO_CHARGE_FOUND).
+  - No payment record is found after the due date for the account (reason code: NO_PAYMENT_FOUND).
+  - Customer claims system error, system delay, or bank processing delay caused the
+    late posting — requires investigation into system logs or bank confirmation.
+
+### Edge Cases
+- Boundary dates: A payment with PAYMENT_CREATION_DATE exactly equal to DUE_DATE
+  qualifies for approval (on or before).
+- Multiple LATE_PYM charges: The most recent charge before the dispute creation date
+  is used (ROW_NUMBER with ORDER BY CREATION_DATE DESC, rn = 1).
+- Multiple charge groups: The most recent charge group with DUE_DATE before the
+  charge creation date is used (ROW_NUMBER with ORDER BY DUE_DATE DESC, rn2 = 1).
+
+### SQL Validation Steps
+-- NOTE: All SQL uses -- for inline comments (ANSI standard).
+-- Execute steps in order. Each step documents where its input values come from.
+-- Replace ? placeholders with actual values obtained from the previous step.
+
+-- STEP 1: Validate the charge and check for existing credits or outstanding balance.
+-- Input  : dispute_id supplied by the application.
+-- Output : ACCOUNT_ID, CHARGE_ID, BALANCE, DUE_DATE, RESTRICTION_AMOUNT,
+--          CHARGE_CREATION_DATE → used in Step 2.
+-- Rules  :
+--   IF no rows returned → MANUAL REVIEW (reason code: NO_CHARGE_FOUND).
+--   IF BALANCE > 0 → REJECT (outstanding balance remains).
+--   IF RESTRICTION_AMOUNT > 0 → REJECT (credit already applied).
+--   IF BALANCE = 0 AND RESTRICTION_AMOUNT = 0 → proceed to Step 2.
+SELECT DISPUTE_ID, CHARGE_ID, ACCOUNT_ID, BILLING_ARRANGEMENT_ID, INVOICE_ID,
+       AMOUNT, CHARGE_CODE, CHARGE_CREATION_DATE, DISPUTE_CREATION_DATE,
+       DEBIT_ID, CHARGES_AMOUNT, TAX_AMOUNT, BALANCE, DUE_DATE, RESTRICTION_AMOUNT
+FROM (
+    SELECT base.DISPUTE_ID, base.CHARGE_ID, base.ACCOUNT_ID, base.BILLING_ARRANGEMENT_ID,
+           base.INVOICE_ID, base.AMOUNT, base.CHARGE_CODE, base.CHARGE_CREATION_DATE,
+           base.DISPUTE_CREATION_DATE, base.RESTRICTION_AMOUNT,
+           cg.DEBIT_ID, cg.CHARGES_AMOUNT, cg.TAX_AMOUNT, cg.BALANCE, cg.DUE_DATE,
+           ROW_NUMBER() OVER (PARTITION BY base.DISPUTE_ID ORDER BY cg.DUE_DATE DESC) AS rn2
+    FROM (
+        SELECT DISPUTE_ID, CHARGE_ID, ACCOUNT_ID, BILLING_ARRANGEMENT_ID, INVOICE_ID,
+               AMOUNT, CHARGE_CODE, CREATION_DATE AS CHARGE_CREATION_DATE, DISPUTE_CREATION_DATE,
+               RESTRICTION_AMOUNT
+        FROM (
+            SELECT d.DISPUTE_ID,
+                   c.CHARGE_ID, c.ACCOUNT_ID, c.BILLING_ARRANGEMENT_ID, c.INVOICE_ID,
+                   c.AMOUNT, c.CHARGE_CODE, c.CREATION_DATE, c.RESTRICTION_AMOUNT,
+                   d.SYS_CREATION_DATE AS DISPUTE_CREATION_DATE,
+                   ROW_NUMBER() OVER (PARTITION BY d.DISPUTE_ID ORDER BY c.CREATION_DATE DESC) AS rn
+            FROM ar1_dispute d
+            JOIN ar1_charges c
+              ON c.ACCOUNT_ID = d.ACCOUNT_ID
+             AND c.CHARGE_CODE = 'LATE_PYM'
+             AND c.CREATION_DATE < d.SYS_CREATION_DATE
+            WHERE d.DISPUTE_ID IN (?)          -- substitute actual dispute_id
+        )
+        WHERE rn = 1
+    ) base
+    JOIN ar1_charge_group cg
+      ON cg.ACCOUNT_ID = base.ACCOUNT_ID
+     AND cg.BILLING_ARRANGEMENT_ID = base.BILLING_ARRANGEMENT_ID
+     AND cg.DUE_DATE < base.CHARGE_CREATION_DATE
+)
+WHERE rn2 = 1
+ORDER BY DISPUTE_ID;
+
+-- STEP 2: Verify the actual payment date against the due date.
+-- Input  : ACCOUNT_ID from Step 1, DUE_DATE from Step 1.
+-- Output : PAYMENT_CREATION_DATE, PAYMENT_AMOUNT.
+-- Rules  :
+--   IF no rows returned → MANUAL REVIEW (reason code: NO_PAYMENT_FOUND).
+--   IF PAYMENT_CREATION_DATE <= DUE_DATE → APPROVE (payment received on time).
+--   IF PAYMENT_CREATION_DATE > DUE_DATE → REJECT (payment received late).
+SELECT PAYMENT_ID, ACCOUNT_ID, DEPOSIT_DATE, REVERSAL_REASON,
+       SYS_CREATION_DATE AS PAYMENT_CREATION_DATE, AMOUNT AS PAYMENT_AMOUNT
+FROM (
+    SELECT p.PAYMENT_ID, p.ACCOUNT_ID, p.DEPOSIT_DATE, p.REVERSAL_REASON,
+           p.SYS_CREATION_DATE, p.AMOUNT,
+           ROW_NUMBER() OVER (ORDER BY p.SYS_CREATION_DATE ASC) AS rn
+    FROM ar1_payment_details p
+    WHERE p.ACCOUNT_ID = ?                    -- ACCOUNT_ID from Step 1
+      AND p.SYS_CREATION_DATE > ?            -- DUE_DATE from Step 1
+)
+WHERE rn = 1;
+
+### Decision Rules Summary
+After executing all SQL steps, apply this decision matrix:
+
+| Condition                                                          | Decision        | Reason Code       |
+|--------------------------------------------------------------------|-----------------|-------------------|
+| Step 1 returns no rows (no LATE_PYM charge found)                  | Manual Review   | NO_CHARGE_FOUND   |
+| Step 1 BALANCE > 0                                                 | REJECT          | —                 |
+| Step 1 RESTRICTION_AMOUNT > 0                                      | REJECT          | —                 |
+| Step 2 returns no rows (no payment after due date)                 | Manual Review   | NO_PAYMENT_FOUND  |
+| Step 2 PAYMENT_CREATION_DATE <= DUE_DATE                           | APPROVE         | —                 |
+| Step 2 PAYMENT_CREATION_DATE > DUE_DATE                            | REJECT          | —                 |
+| Memo indicates system error / delay / bank processing issue        | Manual Review   | —                 |
+
+### Audit / Notes for Agent
+- Always record which SQL steps were executed and their outcomes in the
+  dispute audit log before submitting an Approve / Reject decision.
+- For Manual Review cases, include the reason code (NO_CHARGE_FOUND or
+  NO_PAYMENT_FOUND) to help CSRs triage faster.
+- For APPROVE, specify: "Initiate charge-level credit on CHARGE_ID {x}."
+- For REJECT, specify: "No action — charge stands."
+
+
+## Subscription / FA (Administrative)
+
+### Overview
+This category covers administrative disputes where subscription charges and/or FA
+(Financial Account) mapping are questioned, but the memo often does not provide
+enough structured detail to decide purely from text. Typical themes include:
+- "Subscription - FA"
+- "Resolution Protection - FA"
+- "POA ongoing / pending"
+- customer requests to move products to a single FA
+- subscription billed with no usage or migration/admin mismatch
+
+This category is operationally different from pure rejection-fee logic:
+it is primarily an account structure + billing alignment investigation.
+
+### Typical Patterns Seen In Memo Data (118 samples)
+- Short memos with minimal context (often only "Subscription - FA").
+- "Resolution Protection" references that imply interim handling / pending actions.
+- Product/line should bill on one FA, but charges appear on another FA.
+- Customer claims no usage yet subscription billed.
+- POA pending/ongoing notes where final decision is deferred.
+
+### High-Level Decision Policy
+Use the following outcome framework:
+
+1) APPROVE (credit/adjust) when:
+   - subscription charge is posted to the wrong FA and customer impact is confirmed, OR
+   - duplicate/misconfigured subscription charge is verified, OR
+   - service migration/admin handling created unintended subscription billing.
+
+2) REJECT when:
+   - charge is valid, mapped to the correct FA, and usage/subscription entitlement exists, OR
+   - no evidence of billing/admin error is found in AR/Invoicing records.
+
+3) MANUAL REVIEW when:
+   - memo lacks required identifiers and records are ambiguous,
+   - POA/protection workflow is still in progress,
+   - cross-system mapping (AR vs BL) is inconsistent and needs senior validation.
+
+### Suggested Data Model Anchors (AR + Invoicing)
+Use these entities as evidence points:
+
+Accounts Receivable side:
+- AR1_DISPUTE (dispute header/status/account linkage)
+- AR1_ACCOUNT (FA/account identity)
+- AR1_PAY_CHANNEL (pay channel to account/FA mapping)
+- AR1_INVOICE (invoice records by account)
+- AR1_CHARGES (posted charges)
+- AR1_MEMO (memo/audit context)
+
+Invoicing side:
+- BL1_PAY_CHANNEL (billing pay-channel linkage)
+- BL1_INVOICE (invoice header and cycle context)
+- BL1_CHARGE / BL1_CHARGE_REQUEST (charge-level generation records)
+- BL1_INV_CHARGE_REL (invoice-to-charge linkage)
+- BL1_CUSTOMER / BL1_CUSTOMER_CHARGES (customer-level charge view)
+
+### SQL Validation Steps (Template Flow)
+-- NOTE:
+-- 1) Replace ? placeholders with values from your environment.
+-- 2) Column names can vary by implementation; adjust using local schema metadata.
+-- 3) Keep all query outputs in audit notes before final recommendation.
+
+-- STEP 1: Locate open dispute and capture account context.
+SELECT *
+FROM   ar1_dispute
+WHERE  dispute_id = ?
+AND    status = 'O';
+
+-- STEP 2: Confirm account/FA master context.
+SELECT *
+FROM   ar1_account
+WHERE  account_id = ?;    -- account_id from Step 1
+
+-- STEP 3: Get pay-channel mapping for this account (AR side).
+SELECT *
+FROM   ar1_pay_channel
+WHERE  account_id = ?;    -- account_id from Step 1
+
+-- STEP 4: Retrieve invoice and charge footprint on AR side.
+SELECT *
+FROM   ar1_invoice
+WHERE  account_id = ?
+ORDER BY invoice_date DESC;
+
+SELECT *
+FROM   ar1_charges
+WHERE  account_id = ?
+ORDER BY effective_date DESC;
+
+-- STEP 5: Cross-check invoicing-side records for same payer/channel/account context.
+SELECT *
+FROM   bl1_pay_channel
+WHERE  pay_channel_no = ?;  -- mapped from AR pay channel
+
+SELECT *
+FROM   bl1_invoice
+WHERE  pay_channel_no = ?
+ORDER BY issue_date DESC;
+
+SELECT *
+FROM   bl1_charge
+WHERE  pay_channel_no = ?
+ORDER BY effective_date DESC;
+
+SELECT *
+FROM   bl1_inv_charge_rel
+WHERE  invoice_id = ?;      -- invoice from BL1_INVOICE
+
+-- STEP 6: If memo references "no usage", validate subscription legitimacy via
+-- charge recurrence/service alignment evidence in billing artifacts.
+SELECT *
+FROM   bl1_charge_request
+WHERE  pay_channel_no = ?
+ORDER BY create_date DESC;
+
+### Decision Matrix (Operational)
+| Validation Outcome                                                                 | Decision      |
+|------------------------------------------------------------------------------------|---------------|
+| Wrong FA mapping confirmed and customer billed incorrectly                         | APPROVE       |
+| Duplicate or erroneous subscription charge confirmed                               | APPROVE       |
+| Valid subscription charge on correct FA with supporting billing chain              | REJECT        |
+| POA/protection case active and evidence incomplete                                 | Manual Review |
+| Insufficient linkage between dispute, account, and billing records                 | Manual Review |
+
+### Agent Notes (How AI should answer)
+- Prioritize factual wording and evidence references.
+- If evidence is weak, choose Manual Review instead of forced Approve/Reject.
+- Mention FA/account mapping findings explicitly in the resolution summary.
+- For customer communication, keep recommended action concise and actionable.
