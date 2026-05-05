@@ -28,7 +28,7 @@
 
 3. **Open your browser** - The dashboard will automatically open at `http://localhost:8501`
 
----
+---   
 
 ## 📊 Features
 
